@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Generation Studio - Cyber Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Share+Tech+Mono&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Frontend Logic (Defer loads after DOM is fully parsed) -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Cyber Background Elements -->
+    <div class="glow-bg">
+        <div class="nebula-indigo"></div>
+        <div class="nebula-cyan"></div>
+        <div class="nebula-magenta"></div>
+    </div>
+    <div class="grid-overlay"></div>
+
+    <div class="app-container">
+        <!-- Sci-Fi Header Banner -->
+        <header class="cyber-banner card-deck">
+            <div class="tech-lines"></div>
+            <div class="banner-content">
+                <div class="banner-title-row">
+                    <div class="logo-node">
+                        <i class="fa-solid fa-microchip banner-logo-icon"></i>
+                        <span class="status-pulse"></span>
+                    </div>
+                    <h1>IMAGE GENERATION STUDIO</h1>
+                </div>
+                <p class="banner-subtitle-1">SYSTEM CONTROLLER: Task-02 // SD-XL // DALL-E mini // Image-to-Image // Style presets</p>
+                <div class="banner-divider">
+                    <span class="l-bracket">[</span>
+                    <span class="divider-txt">PRE-TRAINED GENERATIVE AI ENGINE DECK</span>
+                    <span class="r-bracket">]</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs Bar -->
+        <nav class="navigation-bar">
+            <button class="nav-tab active" data-tab="tab-pollinations">
+                <span class="tab-index">01/</span><i class="fa-solid fa-wand-magic-sparkles"></i> Pollinations.ai
+            </button>
+            <button class="nav-tab" data-tab="tab-dalle">
+                <span class="tab-index">02/</span><i class="fa-solid fa-border-none"></i> DALL-E mini Grid
+            </button>
+            <button class="nav-tab" data-tab="tab-img2img">
+                <span class="tab-index">03/</span><i class="fa-solid fa-bezier-curve"></i> Img-to-Img
+            </button>
+            <button class="nav-tab" data-tab="tab-gallery">
+                <span class="tab-index">04/</span><i class="fa-solid fa-compass"></i> Style Gallery
+            </button>
+            <button class="nav-tab" data-tab="tab-about">
+                <span class="tab-index">05/</span><i class="fa-solid fa-terminal"></i> Tech Specs
+            </button>
+        </nav>
+
+        <!-- Workspace Container -->
+        <div class="workspace">
+
+            <!-- Active Tab Contents -->
+            <div class="tab-contents-container">
+
+                <!-- 1. POLLINATIONS TAB -->
+                <div id="tab-pollinations" class="tab-panel active">
+                    <div class="panel-layout">
+                        <!-- Sidebar Controls -->
+                        <div class="controls-sidebar card-deck">
+                            <div class="tech-corner tl"></div><div class="tech-corner tr"></div>
+                            <div class="tech-corner bl"></div><div class="tech-corner br"></div>
+                            
+                            <div class="sidebar-sec-header">
+                                <span class="sec-tag">// CONTROL PANEL</span>
+                                <span class="connection-status"><span class="status-dot green"></span> ONLINE</span>
+                            </div>
+
+                            <div class="form-section">
+                                <label for="poll-prompt" class="form-label"><i class="fa-solid fa-angle-right label-arrow"></i> Text prompt input</label>
+                                <textarea id="poll-prompt" placeholder="a humanoid AI robot sitting at a desk coding, glowing blue circuits, dark office, dramatic lighting, photorealistic"></textarea>
+                            </div>
+
+                            <div class="form-section">
+                                <label for="poll-neg-prompt" class="form-label"><i class="fa-solid fa-angle-right label-arrow"></i> Negative parameters</label>
+                                <input type="text" id="poll-neg-prompt" placeholder="blurry, low quality, distorted, ugly, watermark, text" value="blurry, low quality, distorted, ugly, watermark, text">
+                            </div>
+
+                            <div class="form-section">
+                                <label for="poll-model" class="form-label"><i class="fa-solid fa-angle-right label-arrow"></i> Target neural model</label>
+                                <div class="select-wrapper">
+                                    <select id="poll-model">
+                                        <option value="flux">FLUX.1 [schnell] (Standard)</option>
+                                        <option value="turbo">Stable Diffusion [turbo] (Fast)</option>
+                                        <option value="flux-realism">FLUX.1 [realism] (High-Fidelity)</option>
+                                        <option value="flux-anime">FLUX.1 [anime] (Cel-Shaded)</option>
+                                        <option value="flux-3d">FLUX.1 [3d] (Raytraced)</option>
+                                    </select>
+                                    <i class="fa-solid fa-caret-down select-caret"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-section half">
+                                    <label for="poll-steps">Inference steps <span class="val-display" id="steps-val">25</span></label>
+                                    <div class="slider-track-wrapper">
+                                        <input type="range" id="poll-steps" min="10" max="150" step="1" value="25">
+                                    </div>
+                                </div>
+                                <div class="form-section half">
+                                    <label for="poll-cfg">CFG scale <span class="val-display" id="cfg-val">7.5</span></label>
+                                    <div class="slider-track-wrapper">
+                                        <input type="range" id="poll-cfg" min="1" max="20" step="0.5" value="7.5">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-section half">
+                                    <label for="poll-width">Width output <span class="val-display" id="width-val">512</span></label>
+                                    <div class="slider-track-wrapper">
+                                        <input type="range" id="poll-width" min="256" max="1024" step="64" value="512">
+                                    </div>
+                                </div>
+                                <div class="form-section half">
+                                    <label for="poll-height">Height output <span class="val-display" id="height-val">512</span></label>
+                                    <div class="slider-track-wrapper">
+                                        <input type="range" id="poll-height" min="256" max="1024" step="64" value="512">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <label for="poll-seed" class="form-label"><i class="fa-solid fa-angle-right label-arrow"></i> Numeric seed config</label>
+                                <div class="seed-input-wrapper">
+                                    <input type="number" id="poll-seed" placeholder="Random generation seed">
+                                    <button type="button" id="poll-clear-seed" class="btn-icon-inline" title="Randomize seed"><i class="fa-solid fa-arrows-rotate"></i></button>
+                                </div>
+                            </div>
+
+                            <button id="poll-generate-btn" class="cyber-btn">
+                                <span class="btn-txt"><i class="fa-solid fa-bolt-lightning"></i> INITIALIZE GENERATION</span>
+                                <div class="spinner hidden"></div>
+                            </button>
+                        </div>
+
+                        <!-- Viewer Display -->
+                        <div class="viewer-area card-deck">
+                            <div class="tech-corner tl"></div><div class="tech-corner tr"></div>
+                            <div class="tech-corner bl"></div><div class="tech-corner br"></div>
+                            
+                            <div class="viewer-header">
+                                <span class="sec-tag">// ARTWORK SCANNER OUTPUT</span>
+                                <div class="viewer-actions hidden" id="poll-actions">
+                                    <button id="poll-download" class="action-btn" title="Download Image"><i class="fa-solid fa-download"></i> SAVE IMAGE</button>
+                                </div>
+                            </div>
+                            <div class="viewer-canvas" id="poll-canvas">
+                                <!-- Grid lines helper -->
+                                <div class="canvas-grid-lines"></div>
+
+                                <!-- Default Empty State -->
+                                <div class="canvas-state" id="poll-empty-state">
+                                    <div class="empty-icon"><i class="fa-solid fa-crosshairs"></i></div>
+                                    <p class="matrix-text">SYSTEM STANDBY // INPUT PROMPT TO BEGIN FABRICATION</p>
+                                </div>
+                                <!-- Loading State -->
+                                <div class="canvas-state hidden" id="poll-loading-state">
+                                    <div class="laser-scanner"></div>
+                                    <p class="loading-msg neon-pulse">FABRICATING PIXEL GRID...</p>
+                                    <span id="poll-timer">TIME ELAPSED: 0s</span>
+                                </div>
+                                <!-- Result Display Container -->
+                                <div class="result-image-container hidden" id="poll-result-container">
+                                    <img id="poll-result-img" src="" alt="Generated image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. DALL-E MINI TAB -->
+                <div id="tab-dalle" class="tab-panel">
+                    <div class="panel-layout">
+                        <!-- Sidebar Controls -->
+                        <div class="controls-sidebar card-deck">
+                            <div class="tech-corner tl"></div><div class="tech-corner tr"></div>
+                            <div class="tech-corner bl"></div><div class="tech-corner br"></div>
+                            
+                            <div class="sidebar-sec-header">
+                                <span class="sec-tag">// 3x3 GRID CONTROLLER</span>
+                                <span class="connection-status"><span class="status-dot green"></span> ONLINE</span>
+                            </div>
+
+                            <div class="form-section">
+                                <label for="dalle-prompt" class="form-label"><i class="fa-solid fa-angle-right label-arrow"></i> Grid text prompt</label>
+                                <textarea id="dalle-prompt" placeholder="a small cottage in the woods, retro painting style, 3d render"></textarea>
+                            </div>
+
+                            <div class="form-section">
+                                <label for="dalle-neg-prompt" class="form-label"><i class="fa-solid fa-angle-right label-arrow"></i> Grid negative terms</label>
+                                <input type="text" id="dalle-neg-prompt" placeholder="blurry, low quality, watermark" value="blurry, low quality, watermark">
+                            </div>
+
+                            <button id="dalle-generate-btn" class="cyber-btn magenta-theme">
+                                <span class="btn-txt"><i class="fa-solid fa-border-all"></i> ACTIVATE 3X3 CORE</span>
+                                <div class="spinner hidden"></div>
+                            </button>
+                        </div>
+
+                        <!-- Viewer Area (9 Grid) -->
+                        <div class="viewer-area card-deck">
+                            <div class="tech-corner tl"></div><div class="tech-corner tr"></div>
+                            <div class="tech-corner bl"></div><div class="tech-corner br"></div>
+                            
+                            <div class="viewer-header">
+                                <span class="sec-tag">// MULTI-GRID ARRAY MATRIX</span>
+                            </div>
+                            <div class="viewer-canvas" id="dalle-canvas">
+                                <div class="canvas-grid-lines"></div>
+                                <!-- Empty State -->
+                                <div class="canvas-state" id="dalle-empty-state">
+                                    <div class="empty-icon"><i class="fa-solid fa-table-cells"></i></div>
+                                    <p class="matrix-text">STANDBY // GENERATE 3x3 VARIATION ARRAY</p>
+                                </div>
+                                <!-- Loading State -->
+                                <div class="canvas-state hidden" id="dalle-loading-state">
+                                    <div class="laser-scanner"></div>
+                                    <div class="grid-skeleton">
+                                        <div class="sk-item"></div><div class="sk-item"></div><div class="sk-item"></div>
+                                        <div class="sk-item"></div><div class="sk-item"></div><div class="sk-item"></div>
+                                        <div class="sk-item"></div><div class="sk-item"></div><div class="sk-item"></div>
+                                    </div>
+                                    <p class="loading-msg neon-pulse">COMPILING 9 VARIATION THREADS...</p>
+                                    <span id="dalle-timer">TIME ELAPSED: 0s</span>
+                                </div>
+                                <!-- Result Grid -->
+                                <div class="result-grid-3x3 hidden" id="dalle-grid-container">
+                                    <!-- Injected -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. IMAGE-TO-IMAGE TAB -->
+                <div id="tab-img2img" class="tab-panel">
+                    <div class="panel-layout">
+                        <!-- Sidebar Controls -->
+                        <div class="controls-sidebar card-deck">
+                            <div class="tech-corner tl"></div><div class="tech-corner tr"></div>
+                            <div class="tech-corner bl"></div><div class="tech-corner br"></div>
+                            
+                            <div class="sidebar-sec-header">
+                                <span class="sec-tag">// RENDER WARP CONFIG</span>
+                                <span class="connection-status"><span class="status-dot green"></span> ONLINE</span>
+                            </div>
+
+                            <div class="form-section">
+                                <label class="form-label"><i class="fa-solid fa-angle-right label-arrow"></i> Upload source matrix</label>
+                                <div class="drag-upload-box" id="drop-zone">
+                                    <i class="fa-solid fa-circle-arrow-up upload-icon"></i>
+                                    <p>Drop file here or <span>browse</span></p>
+                                    <input type="file" id="img2img-file" accept="image/*" class="hidden">
+                                </div>
+                                <div class="preview-upload-wrapper hidden" id="source-preview-wrapper">
+                                    <img id="source-preview-img" src="" alt="Source preview">
+                                    <button type="button" id="remove-source-img" class="remove-btn"><i class="fa-solid fa-xmark"></i> DE-LINK IMAGE</button>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <label for="img2img-prompt" class="form-label"><i class="fa-solid fa-angle-right label-arrow"></i> Warp instruction prompt</label>
+                                <textarea id="img2img-prompt" placeholder="make it watercolor style, glowing fantasy forest background..."></textarea>
+                            </div>
+
+                            <div class="form-section">
+                                <label for="img2img-strength">Similarity scale <span class="val-display" id="strength-val">0.5</span></label>
+                                <div class="slider-track-wrapper">
+                                    <input type="range" id="img2img-strength" min="0.1" max="0.9" step="0.05" value="0.5">
+                                </div>
+                                <small class="slider-hint">Low = keep original base; High = override completely.</small>
+                            </div>
+
+                            <div class="form-section">
+                                <label for="img2img-model" class="form-label"><i class="fa-solid fa-angle-right label-arrow"></i> Neural compiler</label>
+                                <div class="select-wrapper">
+                                    <select id="img2img-model">
+                                        <option value="runwayml/stable-diffusion-v1-5">SD-v1.5 [img2img-engine]</option>
+                                        <option value="stabilityai/stable-diffusion-xl-refiner-1.0">SD-XL [refiner-reflector]</option>
+                                    </select>
+                                    <i class="fa-solid fa-caret-down select-caret"></i>
+                                </div>
+                            </div>
+
+                            <button id="img2img-generate-btn" class="cyber-btn cyan-theme">
+                                <span class="btn-txt"><i class="fa-solid fa-arrows-spin"></i> INITIALIZE TRANSFORM</span>
+                                <div class="spinner hidden"></div>
+                            </button>
+                        </div>
+
+                        <!-- Viewer Area (Comparison) -->
+                        <div class="viewer-area card-deck">
+                            <div class="tech-corner tl"></div><div class="tech-corner tr"></div>
+                            <div class="tech-corner bl"></div><div class="tech-corner br"></div>
+                            
+                            <div class="viewer-header">
+                                <span class="sec-tag">// RENDER WARP COMPARISON</span>
+                            </div>
+                            <div class="viewer-canvas" id="img2img-canvas">
+                                <div class="canvas-grid-lines"></div>
+                                <!-- Empty State -->
+                                <div class="canvas-state" id="img2img-empty-state">
+                                    <div class="empty-icon"><i class="fa-solid fa-shuffle"></i></div>
+                                    <p class="matrix-text">STANDBY // UPLOAD MATRIX AND PREPARE TRANSFORM</p>
+                                </div>
+                                <!-- Loading State -->
+                                <div class="canvas-state hidden" id="img2img-loading-state">
+                                    <div class="laser-scanner"></div>
+                                    <div class="orbit-spinner">
+                                        <div class="ring r1"></div>
+                                        <div class="ring r2"></div>
+                                        <div class="ring r3"></div>
+                                    </div>
+                                    <p class="loading-msg neon-pulse">COMPUTING WARPING MATRICES...</p>
+                                </div>
+                                <!-- Result Side-by-Side -->
+                                <div class="result-img2img-comparison hidden" id="img2img-result-container">
+                                    <div class="comparison-panel">
+                                        <span class="tech-lbl">// ORIGINAL MATRIX</span>
+                                        <img id="img2img-original" src="" alt="Original image">
+                                    </div>
+                                    <div class="comparison-arrow">
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </div>
+                                    <div class="comparison-panel">
+                                        <span class="tech-lbl">// OUTPUT MATRIX</span>
+                                        <img id="img2img-result" src="" alt="Transformed image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. STYLE GALLERY TAB -->
+                <div id="tab-gallery" class="tab-panel">
+                    <div class="style-gallery-intro">
+                        <h2>CHOOSE VISUAL CORE CARTRIDGE</h2>
+                        <p class="mono-subtitle">SELECT AN AESTHETIC PROTOCOL TO PRE-LOAD MODIFIERS INTO GENERATOR PORT</p>
+                    </div>
+                    <div class="gallery-grid">
+                        <div class="gallery-style-card card-deck" data-style="cinematic">
+                            <div class="tech-corner tl"></div><div class="tech-corner tr"></div>
+                            <div class="style-banner-preview cinematic-grad">
+                                <i class="fa-solid fa-video"></i>
+                            </div>
+                            <div class="gallery-card-content">
+                                <h3>CINEMATIC PROTOCOL</h3>
+                                <p>Volumetric atmospheric fog, dramatic key lighting, anamorphic 35mm lens, hyper-detail photo-real film grading.</p>
+                                <button class="btn-use-style">LOAD PROTOCOL</button>
+                            </div>
+                        </div>
+                        <div class="gallery-style-card card-deck" data-style="anime">
+                            <div class="tech-corner tl"></div><div class="tech-corner tr"></div>
+                            <div class="style-banner-preview anime-grad">
+                                <i class="fa-solid fa-pen-fancy"></i>
+                            </div>
+                            <div class="gallery-card-content">
+                                <h3>ANIME PROTOCOL</h3>
+                                <p>Sleek key lines, cel-shaded lighting arrays, hand-painted background sky, studio anime aesthetic art style.</p>
+                                <button class="btn-use-style">LOAD PROTOCOL</button>
+                            </div>
+                        </div>
+                        <div class="gallery-style-card card-deck" data-style="cyberpunk">
+                            <div class="tech-corner tl"></div><div class="tech-corner tr"></div>
+                            <div class="style-banner-preview cyberpunk-grad">
+                                <i class="fa-solid fa-radiation"></i>
+                            </div>
+                            <div class="gallery-card-content">
+                                <h3>CYBER RETRO PROTOCOL</h3>
+                                <p>Faceted neon signs, high-contrast pink/cyan lights, rainy dark street reflection grids, synthwave cyber-core.</p>
+                                <button class="btn-use-style">LOAD PROTOCOL</button>
+                            </div>
+                        </div>
+                        <div class="gallery-style-card card-deck" data-style="3d-render">
+                            <div class="tech-corner tl"></div><div class="tech-corner tr"></div>
+                            <div class="style-banner-preview rendering-grad">
+                                <i class="fa-solid fa-cube"></i>
+                            </div>
+                            <div class="gallery-card-content">
+                                <h3>3D ENGINE PROTOCOL</h3>
+                                <p>Raytraced shadows, physically based metallic shaders, global illumination bounces, Unreal Engine 5 aesthetic.</p>
+                                <button class="btn-use-style">LOAD PROTOCOL</button>
+                            </div>
+                        </div>
+                        <div class="gallery-style-card card-deck" data-style="watercolor">
+                            <div class="tech-corner tl"></div><div class="tech-corner tr"></div>
+                            <div class="style-banner-preview watercolor-grad">
+                                <i class="fa-solid fa-droplet"></i>
+                            </div>
+                            <div class="gallery-card-content">
+                                <h3>WATERCOLOUR WASH</h3>
+                                <p>Pigment blending, dry-brush outlines, delicate pastel coloring, wet-on-wet ink bleed splash aesthetic.</p>
+                                <button class="btn-use-style">LOAD PROTOCOL</button>
+                            </div>
+                        </div>
+                        <div class="gallery-style-card card-deck" data-style="fantasy">
+                            <div class="tech-corner tl"></div><div class="tech-corner tr"></div>
+                            <div class="style-banner-preview fantasy-grad">
+                                <i class="fa-solid fa-hat-wizard"></i>
+                            </div>
+                            <div class="gallery-card-content">
+                                <h3>MYSTICAL PROTOCOL</h3>
+                                <p>Ethereal light beams, ancient ruins landscape, magical particle dust clusters, hyperrealistic dark fantasy illustration.</p>
+                                <button class="btn-use-style">LOAD PROTOCOL</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. ABOUT & GUIDE TAB -->
+                <div id="tab-about" class="tab-panel">
+                    <div class="about-container card-deck">
+                        <div class="tech-corner tl"></div><div class="tech-corner tr"></div>
+                        <div class="tech-corner bl"></div><div class="tech-corner br"></div>
+                        <h2>// CORE ARCHITECTURE SPECIFICATIONS</h2>
+                        <p class="intro-p">Image Generation Studio integrates multiple remote neural pipelines to run client-side text-to-image and image-to-image transformations. System routes proxy through local thread managers to ensure failure-free generations.</p>
+                        
+                        <div class="about-grid">
+                            <div class="about-card">
+                                <h3><i class="fa-solid fa-microchip"></i> POLLINATIONS.AI DECK</h3>
+                                <p>Direct keyless interface communicating with external GPU compute clusters. Automatically bypasses typical server constraints and yields real-time rendering output grids.</p>
+                            </div>
+                            <div class="about-card">
+                                <h3><i class="fa-solid fa-grip"></i> DALL-E MINI ARRAY</h3>
+                                <p>Asynchronous multi-thread network dispatcher that queries 9 endpoints in parallel. Coordinates seeds and compiles output into a consolidated 3x3 review matrix.</p>
+                            </div>
+                            <div class="about-card">
+                                <h3><i class="fa-solid fa-shuffle"></i> IMG-TO-IMG ENGINE</h3>
+                                <p>Processes pixel-level matrix blends. Interpolates uploaded images with prompt styles using weight vectors to perform local style transfer simulation.</p>
+                            </div>
+                        </div>
+
+                        <div class="tips-section">
+                            <h3>// SIGNAL PROMPTING COMMANDS</h3>
+                            <ul>
+                                <li><strong>DESCRIPTOR SCALES:</strong> Describe objects explicitly. Avoid vagueness (e.g. "a cybernetic wolf with red neon eyes" rather than "a mechanical dog").</li>
+                                <li><strong>ILLUMINATION VECTORS:</strong> Inject terms like "volumetric global illumination", "ambient occlusion", "dark studio key lights".</li>
+                                <li><strong>COMPLEXITY PARAMETERS:</strong> Specify output finish: "8k resolution, octane render, raw photograph style, hyperdetailed texture".</li>
+                                <li><strong>NEGATIVE EXCLUSIONS:</strong> Use the negative parameter block to clear artifacts: "blurry, lowres, watermark text, bad hands, anatomy errors".</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Global Session Gallery (For single generations) -->
+        <section class="global-gallery card-deck">
+            <div class="tech-corner tl"></div><div class="tech-corner tr"></div>
+            <span class="gallery-title-bar"><i class="fa-solid fa-network-wired"></i> SYSTEM LOG GALLERY // SESSION IMAGES</span>
+            <div class="global-gallery-list" id="global-gallery-list">
+                <div class="gallery-empty-msg">SYSTEM CACHE EMPTY // NO GENERATED DATA</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Fullscreen Lightbox Modal -->
+    <div id="lightbox" class="modal-overlay hidden">
+        <button id="lightbox-close" class="lightbox-close-btn"><i class="fa-solid fa-xmark"></i></button>
+        <img id="lightbox-img" src="" alt="Fullscreen view">
+    </div>
+</body>
+</html>

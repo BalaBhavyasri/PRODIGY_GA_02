@@ -75,17 +75,6 @@ Natural-language prompts
 AI-generated visual content
 Prompt experimentation
 Reproducible generation workflow
-📂 Suggested Project Structure
-Task-02-Image-Generation/
-│
-├── generated_images/
-│   ├── image_01.png
-│   └── image_02.png
-│
-├── generate.py
-├── requirements.txt
-└── README.md
-🚀 Installation
 
 Clone the repository:
 
@@ -103,6 +92,7 @@ transformers
 diffusers
 accelerate
 Pillow
+
 ▶️ Running the Project
 
 Run the image generation script:
